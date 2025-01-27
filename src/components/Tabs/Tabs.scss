@@ -1,0 +1,17 @@
+.tabs--container {
+    width: 100%;
+    position: relative;
+    .tab--group {
+        display: flex;
+        gap: 8px;
+        margin: 32px 0;
+    }
+}
+
+.tab--content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 80px;
+}
