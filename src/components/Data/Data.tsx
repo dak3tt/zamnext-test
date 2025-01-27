@@ -66,7 +66,7 @@ export default function Data({ category }: DataProps) {
           </div>
         ))
       ) : (
-        <div>Нет данных для категории "{category}".</div>
+        <div>Нет данных для категории '{category}'.</div>
       )}
     </>
   );
