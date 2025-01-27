@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "../../libs/supabaseClient";
-import LazyLoad from "../LazyLoad/LazyLoad";
 import "./Data.scss";
 import Image from "next/image";
 
@@ -17,8 +16,6 @@ interface SiteProps {
   link: string;
   category: string;
 }
-
-const cache = new Map<string, SiteProps[]>();
 
 export default function Data({ category }: DataProps) {
   const [sites, setSites] = useState<SiteProps[]>([]);
