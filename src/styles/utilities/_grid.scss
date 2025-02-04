@@ -1,0 +1,45 @@
+@use "./mixin";
+
+@mixin container {
+  max-width: 100%;
+  margin: 0 80px;
+
+  @include mixin.media-l {
+
+  }
+
+  @include mixin.media-m {
+
+  }
+
+  @include mixin.media-s {
+    margin: 16px;
+  }
+}
+
+.container {
+  @include container;
+}
+
+@mixin gaps {
+  padding-top: 180px;
+  padding-bottom: 180px;
+
+  @include mixin.l {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  @include mixin.m {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+}
+
+
+@mixin pages {
+  .pages & {
+    @content;
+  }
+}

@@ -42,9 +42,10 @@ export default function Tabs() {
         </div>
 
         <div className="tab--content">
-          {activeTab === 0 && <Data category={categories[0]} />}
-          {activeTab === 1 && <Data category={categories[1]} />}
-          {activeTab === 2 && <Data category={categories[2]} />}
+          <Data />
+          {/* {activeTab === 0 && <Data />}
+          {activeTab === 1 && <Data />}
+          {activeTab === 2 && <Data />} */}
         </div>
       </div>
     </div>

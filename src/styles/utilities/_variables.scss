@@ -1,0 +1,29 @@
+// Основные цвета
+
+
+//Примитивы
+$black: #000;
+$white: #fff;
+$blue: #1677FF;
+$slate-1: #f1f5f9;
+$slate-2: #e2e8f0;
+
+
+
+//Семантика: text
+$text-primary: $black;
+$text-secondary: rgba($black, 0.64);
+$text-tertiary: rgba($black, 0.48);
+$text-placeholder: rgba($black, 0.56);
+
+$text-primary-inverted: $white;
+
+
+//Семантика: background
+$bg-primary: $white;
+
+
+//Семантика: utility tab
+$bg-tab-default: $slate-1;
+$bg-tab-hover: $slate-2;
+$bg-tab-active: $black;

@@ -1,3 +1,5 @@
+import "./Tab.scss";
+
 interface Props {
   label: string;
   isActive: boolean;
