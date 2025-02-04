@@ -10,29 +10,35 @@ interface Site {
   link: string;
   image: string;
   created_at: string;
+  category: string;
 }
 
-export default function Data() {
+interface DataProps {
+  category: string;
+}
+
+export default function Data({ category }: DataProps) {
   const [sites, setSites] = useState<Site[]>([]);
 
   useEffect(() => {
     fetch("http://localhost:5001/api/sites")
       .then((res) => res.json())
       .then((data) => {
-        // Сортируем по дате перед сохранением
         const sortedData = data.sort((a: Site, b: Site) => {
           const dateA = new Date(a.created_at).getTime();
           const dateB = new Date(b.created_at).getTime();
-          return dateB - dateA; // Сортировка по убыванию (новые записи сверху)
+          return dateB - dateA;
         });
         setSites(sortedData);
       });
   }, []);
 
+  const filteredSites = sites.filter((site) => site.category === category);
+
   return (
     <>
-      {sites.length > 0
-        ? sites.map((site) => (
+      {filteredSites.length > 0
+        ? filteredSites.map((site) => (
             <div key={site._id} className="site--card">
               <a href={site.link} rel="noopener noreferrer">
                 <div className="site-item">
