@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import createApp from './app';
 
-const PORT: number = parseInt(process.env.PORT || '5000', 10);
+const PORT: number = parseInt(process.env.PORT || '5001', 10);
 const app = createApp();
 
 app.listen(PORT, () => {

@@ -1,56 +1,40 @@
+// src/app/page.tsx
 "use client";
-
 import { useEffect, useState } from "react";
-import { supabase } from "../../libs/supabaseClient";
 import "./Data.scss";
 import Image from "next/image";
 
-interface DataProps {
-  category: string;
-}
-
-interface SiteProps {
-  uuid: string;
-  image: string;
+interface Site {
+  _id: string;
   title: string;
   link: string;
-  category: string;
+  image: string;
+  created_at: string;
 }
 
-export default function Data({ category }: DataProps) {
-  const [sites, setSites] = useState<SiteProps[]>([]);
+export default function Data() {
+  const [sites, setSites] = useState<Site[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("sites")
-          .select("*")
-          .eq("category", category)
-          .order("created_at", { ascending: false });
-
-        if (error) {
-          throw error;
-        }
-
-        if (data) {
-          setSites(data);
-        }
-      } catch (error) {
-        console.error("Ошибка при загрузке данных:", error);
-        setSites([]);
-      }
-    };
-
-    fetchData();
-  }, [category]);
+    fetch("http://localhost:5001/api/sites")
+      .then((res) => res.json())
+      .then((data) => {
+        // Сортируем по дате перед сохранением
+        const sortedData = data.sort((a: Site, b: Site) => {
+          const dateA = new Date(a.created_at).getTime();
+          const dateB = new Date(b.created_at).getTime();
+          return dateB - dateA; // Сортировка по убыванию (новые записи сверху)
+        });
+        setSites(sortedData);
+      });
+  }, []);
 
   return (
     <>
       {sites.length > 0
-        ? sites.map((site, index) => (
-            <div key={index} className="site--card">
-              <a href={site.link} target="_blank" rel="noopener noreferrer">
+        ? sites.map((site) => (
+            <div key={site._id} className="site--card">
+              <a href={site.link} rel="noopener noreferrer">
                 <div className="site-item">
                   <Image
                     src={site.image}
@@ -58,7 +42,7 @@ export default function Data({ category }: DataProps) {
                     width={600}
                     height={400}
                     loading="lazy"
-                    quality={80}
+                    quality={90}
                   />
                   <h6>{site.title}</h6>
                 </div>

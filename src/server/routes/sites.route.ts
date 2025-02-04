@@ -15,15 +15,15 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
 
 
 router.post('/', async (req: Request, res: Response): Promise<void> => {
-  const { title, link } = req.body;
+  const { title, link, image } = req.body;
   
-  if (!title || !link) {
+  if (!title || !link || !image) {
     res.status(400).json({ message: 'Title и Link обязательные поля' });
     return;
   }
 
   try {
-    const newSite = new Site({ title, link });
+    const newSite = new Site({ title, link, image });
     const savedSite = await newSite.save();
     res.status(201).json(savedSite);
   } catch (err) {
