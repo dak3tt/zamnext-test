@@ -6,16 +6,16 @@ import "./Tabs.scss";
 import Data from "../Data/Data";
 
 export default function Tabs() {
-  const [activeTab, setActiveTab] = useState(() => {
-    return Number(sessionStorage.getItem("activeTab")) || 0;
-  });
+  const [activeTab, setActiveTab] = useState<number>(0);
 
   useEffect(() => {
-    const savedScroll = sessionStorage.getItem("scrollPosition");
-    if (savedScroll) {
-      window.scrollTo(0, parseInt(savedScroll, 10));
+    if (typeof window !== "undefined") {
+      const savedTab = sessionStorage.getItem("activeTab");
+      if (savedTab) {
+        setActiveTab(Number(savedTab));
+      }
     }
-  }, [activeTab]);
+  }, []);
 
   const handleTabClick = (index: number) => {
     sessionStorage.setItem("scrollPosition", window.scrollY.toString());
